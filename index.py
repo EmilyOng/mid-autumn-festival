@@ -8,7 +8,7 @@ proj_folder = os.path.expanduser("~/mid-autumn-festival")
 load_dotenv(os.path.join(proj_folder, ".env"))
 
 
-URLS = ["login", "/", "admin", "announcements", "about", "visitor", "map"]
+URLS = ["login", "/", "admin", "announcements", "visitor", "map"]
 
 password = os.environ.get("ADMIN_PASSWORD", default=False)
 
