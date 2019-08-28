@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<center>
+    <div class="panel panel-info header" style="font-size: large;">
+        <div class="panel-heading">欢迎 Welcome {{username}}!</div>
+        <div class="panel-body">
+            <p>Greetings from Dunman High and hope that you have a nice time in MAF!</p>
+            <p>来自Dunman High的问候，希望你在MAF度过愉快的时光！</p>
+
+            <br/>
+
+            <p>Click on the games to know more!</p>
+            <p>点击游戏了解更多！</p>
+        </div>
+    </div>
+    <div class="container">
+        <h1>你的分数 Your score: {{total_score}}</h1>
+        <table id="booth_table" class="table table-responsive table-fixed table-bordered" style="table-layout:fixed;">
+        </table>
+    </div>
+
+</center>
+{% endblock content %}
+
+
+{% block script %}
+    var visited_booths = {{ visited_booths|tojson }};
+    var booths_information = {{ booths_information|tojson }};
+    var booth_table = document.getElementById("booth_table");
+    for (var i=0; i < booths_information.length; i++) {
+        var booths_information = {{ booths_information|tojson }};
+        var booths_name = {{ booths_name|tojson }};
+        var form_value = booths_name[i];
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST")
+
+        var input = document.createElement("input");
+        input.setAttribute("id", form_value);
+        input.setAttribute("name", form_value);
+        input.setAttribute("type", "submit");
+        input.setAttribute("class", "booth_buttons btn-block");
+        input.setAttribute("style", "white-space:pre-line; word-break:keep-all;");
+        for (var j=0; j < visited_booths.length; j++) {
+            if ((i+1)==visited_booths[j]) {
+                input.setAttribute("style", "background:#e5e5ff; white-space:pre-line; word-break:keep-all;");
+            }
+        }
+        input.setAttribute("value", form_value);
+        form.append(input);
+
+        if (i==0 || i%3==0) {
+            var tr = document.createElement("tr");
+            booth_table.append(tr);
+        }
+        var td = document.createElement("td");
+        td.setAttribute("style", "border:2px solid #228B22;");
+        td.append(form);
+        tr.append(td);
+    }
+{% endblock script %}
+

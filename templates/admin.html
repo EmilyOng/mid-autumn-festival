@@ -1,0 +1,171 @@
+{% extends "layout.html" %} {% block content %}
+<center>
+    {{booth}} {% if admin %}
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
+                        <h1>Booth information</h1>
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <form method="POST">
+                        <table id="booth_panel">
+                            <tr>
+                                <th>Booth name</th>
+                                <th>Number of visitors</th>
+                                </th>
+                                <th>Booths Information</th>
+                                </th>
+                            </tr>
+                            {% for i in range (booths_count|length) %}
+                            <tr>
+                                <td>
+                                    <textarea rows="4" cols="50" type="text" name={{i+1}}_boothname>{{booths_name[i]}}</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" name={{i+1}}_count value={{booths_count[i]}}>
+                                </td>
+                                <td>
+                                    <textarea rows="4" cols="50" type="text" name={{i+1}}_information>{{booths_information[i]}}</textarea>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <input class="btn-default" type="submit" value="Save changes">
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                        <h1>Add announcement</h1>
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <form method="POST">
+                        <textarea type="text" name="announcement_form" rows="4" cols="50" autocomplete="off" required></textarea>
+                        <br/>
+                        <input class="btn-default" type="submit" value="Add announcement">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+        <h1>Update user information</h1>
+        <form method="POST">
+            <select name="select_user">
+                {% for user in users %}
+                <option value={{user[0]}}>{{user[0]}}</option>
+                {% endfor %}
+            </select>
+            <input class="btn-default" type="submit">
+        </form>
+        </br/>
+        {% if select_user %}
+        </br/>
+        <form method="POST">
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Contact number</th>
+                    <th>Age</th>
+                    <th>Score</th>
+                    <th>Delete user</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_name" value={{selected_user_data[0]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_first_name" value={{selected_user_data[1]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_last_name" value={{selected_user_data[2]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_contact_number" value={{selected_user_data[3]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_age" value={{selected_user_data[4]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_score" value={{selected_user_data[5]}}>
+                    </td>
+                    <td>
+                        <input type="text" name="{{selected_user_data[0]}}_user_delete" value="Type delete to delete user">
+                    </td>
+                </tr>
+            </table>
+            </br/>
+            <input class="btn-default" type="submit" value="Save changes">
+        </form>
+        </br/><br/>
+        {% endif %}
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#user_modal">See all users</button>
+        <div id="user_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">See all users</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <th>Username&nbsp</th>
+                                <th>First name&nbsp</th>
+                                <th>Last name&nbsp</th>
+                                <th>Contact number&nbsp</th>
+                                <th>Age&nbsp</th>
+                                <th>Score&nbsp</th>
+                                <th>Booths visited&nbsp</th>
+                            </tr>
+                            {% for i in range (modal_users|length) %}
+                            <tr>
+                                {% for j in range (7) %}
+                                <td>{{modal_users[i][j]}}&nbsp</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+</center>
+{% else %}
+<center>
+    <form method="POST" enctype="application/x-www-form-urlencoded">
+        <h2>Admin Password</h2>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input id="password" type="password" class="form-control" name="admin_password" placeholder="Password" required>
+            <input class="btn-default" type="submit" value="Submit">
+        </div>
+    </form>
+    {% if wrong_password %}
+    <div class="alert alert-danger">
+        <strong>Wrong password!</strong>
+    </div>
+    {% endif %}
+</center>
+{% endif %}
+</center>
+
+<center>
+    <form method="POST">
+        <input type="submit" class="btn-default" name="go_back" value="Go back">
+    </form>
+</center>
+{% endblock content%}

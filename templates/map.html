@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <center>
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
+                    <h1>Auditorium</h1>
+                  </a>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/auditorium.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                    <h1>Canteen</h1>
+                  </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/canteen.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                    <h1>Dinner @ Canteen</h1>
+                  </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/dinner_canteen.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                    <h1>Indoor Sports Hall (ISH)</h1>
+                  </a>
+                </div>
+                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/ish.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+                    <h1>Foyer</h1>
+                  </a>
+                </div>
+                <div id="collapseFive" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/foyer.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
+                    <h1>Tea Booth</h1>
+                  </a>
+                </div>
+                <div id="collapseSix" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/vip.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
+                    <h1>Bad Weather</h1>
+                  </a>
+                </div>
+                <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                    <img src="./static/layout_of_booths/badweather.jpg" style="max-width:70%; max-height:90%; height:auto">
+                </div>
+            </div>
+
+        </div>
+    </center>
+{% endblock content %}

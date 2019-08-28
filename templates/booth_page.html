@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<center>
+<div class="container">
+    <h1>{{booth_name}}</h1>
+    <h2>Game Rule: </h2>
+    <div class="well" style="max-width:100%">
+        <pre style="font-size: large; font-family:Arial,monospace; white-space:pre-line; word-break:keep-all;">
+            {{booth_information}}
+        </pre>
+    </div>
+    <br/>
+    {% if visited_booth %}
+        <div class="alert alert-info">
+            <strong>
+            Thank you for coming to the booth!
+            谢谢你来展位！
+            </strong>
+        </div>
+    {% endif %}
+    <form method="POST" enctype="application/x-www-form-urlencoded">
+        <h3>
+        Please approach the station master to enter the score.
+        请向站长进入得分
+        </h3>
+        {% if authorize_sm %}
+            <input id="booth_score" type="number" class="form-control" name="booth_score" placeholder="输入分数 Enter Score" autocomplete="new-password" required>
+        {% else %}
+            <input type="password" placeholder="输入密码 Secret Password" class="booth_buttons" style="border:1px solid #0000ff;" name="secret_password" autocomplete="off" required>
+        {% endif %}
+        <input class="btn-default" type="submit" value="Enter">
+    </form>
+    <br/>
+    <form method="POST">
+        <input type="submit" class="btn-default" name="go_back" value="Go back">
+    </form>
+</div>
+</center>
+{% endblock content %}

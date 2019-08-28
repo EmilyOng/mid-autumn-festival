@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<center>
+    <div class="container">
+    <h1>Welcome!</h1>
+    <div class="panel panel-default" style="font-size: large;">
+        <div class="panel-heading">指示 Instructions</div>
+        <div class="panel-body">
+            <p>Please enter your login/sign up credentials to access the booth page.</p>
+            <p>请输入您的登录/注册凭据以访问展位页面。</p>
+            <p><strong>1. Username must be alphanumeric (i.e. contains only alphabets and numbers)</strong></p>
+            <p>用户名必须是字母数字（即仅包含字母和数字)</p>
+            <p><strong>2. Contact number is in the format 8******* or 9*******</strong></p>
+            <p>联系电话的格式为8 *******或9 *******</p>
+            <p>Do approach the station masters for more assistance.</p>
+            请向站长寻求更多帮助。
+        </div>
+    </div>
+
+    <form method="POST">
+        <input type="submit" name="opt_login" value="登录 Login" class="login_buttons">
+        <br/><br/>
+        <input type="submit" name="opt_signup" value="注册 Sign Up" class="login_buttons">
+    </form>
+
+    {% if opt_signup %}
+        <h2>Sign up</h2>
+        <form method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="input-group">
+                <!--<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>-->
+                <input id="username" type="text" class="form-control" name="signup_username" placeholder="用户名 Username" autocomplete="off" required>
+                <input id="first_name" type="text" class="form-control" name="signup_first_name" placeholder="名字 First Name" autocomplete="off" required>
+                <input id="last_name" type="text" class="form-control" name="signup_last_name" placeholder="姓 Last Name"autocomplete="off"  required>
+                <input id="age" type="number" class="form-control" name="signup_age" min="0" max="100" placeholder="年龄 Age" autocomplete="off" required>
+                <input id="contact_number" type="tel" class="form-control" name="signup_contact_number" pattern="[8-9]{1}[0-9]{7}" autocomplete="off" placeholder="电话号码 Contact Number" required>
+                <br/>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        {% if signup_error %}
+            <div class="alert alert-danger">
+                <strong>{{signup_error}}</strong>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if opt_login %}
+        <h2>Login</h2>
+        <form method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="input-group">
+                <!--<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>-->
+                <input id="username" type="text" class="form-control" name="login_username" placeholder="用户名 Username" autocomplete="off" required>
+                <input id="contact_number" type="tel" class="form-control" name="login_contact_number" pattern="[8-9]{1}[0-9]{7}" autocomplete="off" placeholder="电话号码 Contact Number" required>
+                <br/>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        {% if login_error %}
+            <div class="alert alert-danger">
+                <strong>{{error_msg}}</strong>
+            </div>
+        {% endif %}
+    {% endif %}
+    </div>
+</center>
+{% endblock content %}
